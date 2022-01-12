@@ -1,0 +1,26 @@
+name: npm prerelease
+on:
+  push:
+    branches:
+      - next
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 10
+      - run: yarn
+      - run: npm run transpile
+      - id: publish_dry
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          dry-run: true
+      - uses: JS-DevTools/npm-publish@v1
+        if: contains(steps.publish_dry.outputs.version, '-rc.')
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          tag: next
