@@ -1,6 +1,6 @@
 {
   "name": "lt-react-dropdown",
-  "version": "2.1.0-rc.0",
+  "version": "2.1.0-rc.1",
   "main": "dist/component.js",
   "scripts": {
     "start": "webpack-dev-server",
