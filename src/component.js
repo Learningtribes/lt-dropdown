@@ -20,6 +20,10 @@ export default class Dropdown extends React.Component {
         document.addEventListener("click", this.hidePanel.bind(this), true)
     }
 
+    componentWillUnmount () {
+        document.removeEventListener("click", this.hidePanel.bind(this), true)
+    }
+
     componentDidUpdate (prevProps) {
         const {value, multiple} = this.props
         if (!equal(value, prevProps.value)) {
@@ -31,25 +35,25 @@ export default class Dropdown extends React.Component {
         }
     }
 
-    clean () {
+    clean (value) {
         this.setState({
             selectedValues: [],
-            selectedValue: ''
+            selectedValue: arguments.length ? value : (this.props.multiple ? [] : '')
         }, this.fireOnChange)
     }
 
-    hidePanel = e => {
+    hidePanel (e) {
         if (!this.myRef.current) return
 
         const root = ReactDOM.findDOMNode(this.myRef.current)
         if (root && root.contains(e.target)) return
 
         this.setState({isOpen: false})
-    };
+    }
 
-    toggle = () => {
+    toggle () {
         this.setState({isOpen: !this.state.isOpen})
-    };
+    }
 
     select (item) {
         const {multiple} = this.props
@@ -62,7 +66,7 @@ export default class Dropdown extends React.Component {
     }
 
     selectMultiple (e, item) {
-        const target = e.currentTarget, checked = target.checked
+        const checked = e.currentTarget.checked
         this.setState((prev) => {
             let {selectedValues} = prev
             if (checked) {
@@ -78,30 +82,15 @@ export default class Dropdown extends React.Component {
 
     fireOnChange () {
         const {onChange} = this.props
-        if (onChange) {
-            onChange(this.getSelected())
-        }
+        if (onChange) onChange(this.getSelected())
     }
 
     getSelected () {
         const {data, multiple} = this.props
         const {selectedValue, selectedValues} = this.state
-        let selectedItems = [], selectedItem = null
-        if (multiple) {
-            selectedItems = data.filter(p => {
-                return selectedValues.includes(p.value)
-            })
-            return selectedItems
-        } else {
-            selectedItem = data.find(p => {
-                return p.value === selectedValue
-            })
 
-            if (!selectedItem) {
-                selectedItem = {text: '', value: ''}
-            }
-            return selectedItem
-        }
+        if (multiple) return data.filter(p => selectedValues.includes(p.value))
+        return data.find(p => p.value === selectedValue) || {text: '', value: ''}
     }
 
     getUpOrDownIcon (isOpen) {
