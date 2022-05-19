@@ -102,7 +102,7 @@ export default class Dropdown extends React.Component {
     }
 
     render () {
-        const {data, multiple, optionRender, searchable, placeHolderStr, valueRender} = this.props
+        const {data, multiple, optionRender, searchable, placeHolderStr, valueRender, searchIcon} = this.props
         const {isOpen, filterValue, selectedValues} = this.state
         const selected = this.getSelected()
 
@@ -123,7 +123,7 @@ export default class Dropdown extends React.Component {
         return (
             <div ref={this.myRef} className={'lt-react-dropdown ' + (this.props.className || '')}>
                 <div className="select" onClick={this.toggle.bind(this)}>
-                    {<span className="text"><i className="fal fa-search"></i>{(valueRender || getDefaultVal)(selected)}</span>}
+                    <span className="text">{!!searchIcon && <i className={searchIcon}></i>}{(valueRender || getDefaultVal)(selected)}</span>
                     {this.getUpOrDownIcon(isOpen)}
                 </div>
                 <div className={'panel' + (!this.state.isOpen && ' hide' || '')}>
