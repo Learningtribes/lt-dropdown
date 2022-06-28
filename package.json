@@ -1,6 +1,6 @@
 {
   "name": "lt-react-dropdown",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "main": "dist/component.js",
   "scripts": {
     "start": "webpack-dev-server",
@@ -36,9 +36,7 @@
   },
   "dependencies": {
     "fast-deep-equal": "^3.1.3",
-    "prop-types": "^15.7.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "prop-types": "^15.7.2"
   },
   "repository": {
     "type": "git",
