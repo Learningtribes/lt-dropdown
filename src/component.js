@@ -138,7 +138,7 @@ export default class Dropdown extends React.Component {
                             return (
                                 <li key={`index-${i}`}
                                     onClick={this.select.bind(this, item)}
-                                    className={(item.value == selected.value ? 'active' : '')}
+                                    className={(getIfChecked(item) ? 'active' : '')}
                                 >
                                     {multiple && (
                                         <input type="checkbox" id={boxID} checked={getIfChecked(item)}
