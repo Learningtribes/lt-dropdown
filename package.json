@@ -6,6 +6,7 @@
     "start": "webpack-dev-server",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
+    "prepare": "npm run transpile",
     "transpile": "babel src -d dist  --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
