@@ -10,6 +10,7 @@ export default class Dropdown extends React.Component {
         super(props, context)
 
         this.state = {
+            componentID: (Math.random() + 1).toString(36).substring(7),
             isOpen: false,
             filterValue: '',
             selectedValues: props.value ? props.value.toString().split(',') : [],
@@ -134,7 +135,7 @@ export default class Dropdown extends React.Component {
                     )}
                     <ul>
                         {list.map((item, i) => {
-                            const boxID = `box-${i}`
+                            const boxID = `box-${this.state.componentID}-${i}`
                             return (
                                 <li key={`index-${i}`}
                                     onClick={this.select.bind(this, item)}

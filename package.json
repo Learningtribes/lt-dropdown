@@ -1,11 +1,12 @@
 {
   "name": "lt-react-dropdown",
-  "version": "2.2.0",
+  "version": "2.2.2",
   "main": "dist/component.js",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --mode production",
     "dev": "webpack --mode development",
+    "prepare": "npm run transpile",
     "transpile": "babel src -d dist  --copy-files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
